@@ -1,11 +1,11 @@
 package irix.measurement.service;
 
-import irix.measurement.structure.Measurements;
-import irix.measurement.structure.MeasuringPeriod;
+import irix.measurement.structure.MonMeasurements;
+import irix.measurement.structure.MonMeasuringPeriod;
 
 
 public interface DoseRateImp {
-    String getDoseRateType();
-    MeasuringPeriod getMeasuringPeriod();
-    Measurements getMeasurements() ;
+    String getMonDoseRateType();
+    MonMeasuringPeriod getMonMeasuringPeriod();
+    MonMeasurements getMonMeasurements();
 }

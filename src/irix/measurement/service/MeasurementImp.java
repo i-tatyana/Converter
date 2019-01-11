@@ -1,11 +1,11 @@
 package irix.measurement.service;
 
-import irix.measurement.structure.LocationMeasurement;
-import irix.measurement.structure.Value;
+import irix.measurement.structure.LocLocationMeasurement;
+import irix.measurement.structure.MonValue;
 
 
 public interface MeasurementImp {
-    LocationMeasurement getLocationMeasurement();
-    Value getValue();    
-    String getValidated();
+    LocLocationMeasurement getLocLocationMeasurement();
+    MonValue getMonValue();    
+    String getMonValidated();
 }

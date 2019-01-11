@@ -2,7 +2,7 @@ package irix.location.structure;
 
 import irix.location.service.LocationAttributesImp;
 
-public class LocationAttributes extends Location implements LocationAttributesImp {
+public class LocationAttributes extends LocLocation implements LocationAttributesImp {
     
     private Integer id;
 

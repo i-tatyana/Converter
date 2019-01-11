@@ -1,10 +1,13 @@
-package irix.converter.main;
+package irix.identification.service;
+
+import irix.identification.structure.IdIdentifications;
 
 
 public interface IdentificationSectionalImp {
-    String getOrganisationReporting();
-    String getDateAndTimeOfCreation();
-    String getReportContext();
-    String getReportUUID();
-    String getConfidentiality();
+    String getIdOrganisationReporting();
+    String getIdDateAndTimeOfCreation();
+    String getIdReportContext();
+    String getIdReportUUID();
+    String getIdConfidentiality();
+    IdIdentifications getIdIdentifications();
 }

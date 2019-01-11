@@ -2,7 +2,7 @@ package irix.location.structure;
 
 import irix.location.service.HeightAttributesImp;
 
-public class HeightAttributes extends Height implements HeightAttributesImp {
+public class HeightAttributes extends LocHeight implements HeightAttributesImp {
     
     private String above;
     private String unit;

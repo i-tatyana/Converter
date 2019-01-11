@@ -1,10 +1,10 @@
 package irix.location.service;
 
-import irix.location.structure.Height;
+import irix.location.structure.LocHeight;
 
 
 public interface GeographicCoordinatesImp {
-    Double getLatitude();
-    Double getLongitude();
-    Height getHeight();
+    Double getLocLatitude();
+    Double getLocLongitude();
+    LocHeight getLocHeight();
 }

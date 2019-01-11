@@ -1,10 +1,10 @@
-package irix.converter.main;
+package irix.identification.service;
 
-import irix.identification.structure.OrganizationContactDetails;
-import irix.identification.structure.PersonContactDetails;
+import irix.identification.structure.BaseOrganizationContactInfo;
+import irix.identification.structure.BasePersonContactInfo;
 
 
 public interface IdentificationsImp {    
-    PersonContactDetails getPerson();
-    OrganizationContactDetails getOrganization();    
+    BasePersonContactInfo getPerson();
+    BaseOrganizationContactInfo getOrganization();    
 }

@@ -1,27 +1,26 @@
 package irix.converter.main;
 
-import irix.convertor.sections.IdentificationSectional;
-import irix.convertor.sections.LocationsSectional;
-import irix.convertor.sections.MeasurementsSectional;
-import irix.identification.structure.Identifications;
-import irix.identification.structure.OrganizationContactDetails;
-import irix.identification.structure.PersonContactDetails;
-import irix.identification.structure.ReportDetails;
-import irix.location.structure.GeographicCoordinates;
-import irix.location.structure.Height;
+import irix.converter.sections.Sectional;
+import irix.identification.structure.IdIdentifications;
+import irix.identification.structure.BaseOrganizationContactInfo;
+import irix.identification.structure.BasePersonContactInfo;
+import irix.location.structure.LocGeographicCoordinates;
+import irix.location.structure.LocHeight;
 import irix.location.structure.HeightAttributes;
-import irix.location.structure.Location;
+import irix.location.structure.LocLocation;
 import irix.location.structure.LocationAttributes;
-import irix.measurement.structure.DoseRate;
-import irix.measurement.structure.LocationMeasurement;
+import irix.measurement.structure.MonDoseRate;
+import irix.measurement.structure.LocLocationMeasurement;
 import irix.measurement.structure.LocationMeasurementAttributes;
-import irix.measurement.structure.Measurement;
-import irix.measurement.structure.Measurements;
+import irix.measurement.structure.MonMeasurement;
+import irix.measurement.structure.MonMeasurements;
 import irix.measurement.structure.MeasurementsSectionalAttributes;
-import irix.measurement.structure.MeasuringPeriod;
-import irix.measurement.structure.Value;
+import irix.measurement.structure.MonMeasuringPeriod;
+import irix.measurement.structure.MonValue;
 import irix.measurement.structure.ValueAttributes;
-import irix.section.identifier.Sectional;
+import irix.report.structure.IdIdentificationSectional;
+import irix.report.structure.LocLocationsSectional;
+import irix.report.structure.MonMeasurementsSectional;
 import irix.xml.service.XmlBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -131,24 +130,34 @@ public class Main {
                     String class_name = file.getName().replace(".class", "");  
                     String package_name = getPackageName(class_name);
                     Class sectionalClass = Class.forName(package_name);
-                                        
+                    System.out.println();
+                    System.out.println(sectionalClass);
                     Map<Class, List<Field>> elements = getAllIrixElements(class_name);
+                    System.out.println(elements.size());
                     
-                    IdentificationSectional identification = new IdentificationSectional(
-                            new ReportDetails("met.gov", "09.01.2019", "secret", "45", "super confidial"), 
-                            new Identifications(
-                                    new PersonContactDetails("Vasya", "met.gov", "met@gmail.com"), 
-                                    new OrganizationContactDetails("Vasya","organisationID", "country", "phoneNumber", "faxNumber", "emailAddress", "description")));
+                    IdIdentificationSectional identification = new IdIdentificationSectional(
+                            "met.gov", "09.01.2019", "secret", "45", "super confidial", 
+                            new IdIdentifications(
+                                    new BasePersonContactInfo("Vasya", "met.gov", "met@gmail.com"), 
+                                    new BaseOrganizationContactInfo("Vasya","organisationID", "country", "phoneNumber", "faxNumber", "emailAddress", "description")));
 
-                    MeasurementsSectional measurement = new MeasurementsSectional(
-                            new DoseRate(
+//                    System.out.println(
+//                        identification.getIdOrganisationReporting() + " " +
+//                        identification.getIdDateAndTimeOfCreation() + " " +
+//                        identification.getIdReportContext() + " " +
+//                        identification.getIdReportUUID() + " " +
+//                        identification.getIdConfidentiality()                    
+//                    );                    
+                    
+                    MonMeasurementsSectional measurement = new MonMeasurementsSectional(
+                            new MonDoseRate(
                                 "Gamma", 
-                                new MeasuringPeriod("12.1.2019", "25.1.2019"), 
-                                new Measurements(
-                                    new Measurement(
-                                        new LocationMeasurement(
+                                new MonMeasuringPeriod("12.1.2019", "25.1.2019"), 
+                                new MonMeasurements(
+                                    new MonMeasurement(
+                                        new LocLocationMeasurement(
                                             new LocationMeasurementAttributes("?????")), 
-                                        new Value(12.0, 
+                                        new MonValue(12.0, 
                                             new ValueAttributes("Sv/h")),
                                         "Validated"))),
                             new MeasurementsSectionalAttributes("2019.01.02"));
@@ -168,10 +177,10 @@ public class Main {
 
                         
                         
-                    LocationsSectional location = new LocationsSectional(
-                            new Location("Snovsk", 
-                            new GeographicCoordinates(35.78,23.67, 
-                                    new Height(145, 
+                    LocLocationsSectional location = new LocLocationsSectional(
+                            new LocLocation("Snovsk", 
+                            new LocGeographicCoordinates(35.78,23.67, 
+                                    new LocHeight(145, 
                                             new HeightAttributes("Sea", "m"))), 
                             new LocationAttributes(34)));
 //                    System.out.println(
@@ -199,16 +208,28 @@ public class Main {
 //                                sectional.getMeasurementsSectional().getDoseRate().getMeasurements().getMeasurement().getValidated() + " " + 
 //                                sectional.getMeasurementsSectional().getMeasurementsSectionalAttributes().getValidAt()
 //                        );
+
+//                    System.out.println(
+//                        sectional.getIdIdentificationSectional().getIdOrganisationReporting() + " " +
+//                        sectional.getIdIdentificationSectional().getIdDateAndTimeOfCreation() + " " +
+//                        sectional.getIdIdentificationSectional().getIdReportContext() + " " +
+//                        sectional.getIdIdentificationSectional().getIdReportUUID() + " " +
+//                        sectional.getIdIdentificationSectional().getIdConfidentiality()               
+//                    );  
+
            
                     for (Map.Entry entry: elements.entrySet()) {
                         Class key = (Class) entry.getKey();
                         List<Field> value = (List<Field>) entry.getValue(); 
                         List<Field> fields = getHierarchy(value);
+                        
+                        
+//                    }
                        
                         Method method = null; 
                         
-                        if(class_name.contains("Sectional")){
-                            if(key.getPackage().getName().contains("sections")){
+//                        if(class_name.contains("Sectional")){
+/*                            if(key.getPackage().getName().contains("sections")){
                                 System.out.println(key.getSimpleName());
                                 xml.createElement(key.getSimpleName());
                             }
@@ -242,8 +263,8 @@ public class Main {
                                     System.out.println(key.getSimpleName());
                                     xml.createElement(key.getSuperclass().getSimpleName(), key.getSimpleName());
                                 }
-                            }                        
-                        } 
+                            } */                       
+//                        } 
                     }                    
                     xml.writeContentIntoFile("C:\\Users\\user\\Desktop\\file.xml");  
                 }  

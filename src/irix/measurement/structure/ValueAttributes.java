@@ -3,7 +3,7 @@ package irix.measurement.structure;
 import irix.measurement.service.ValueAttributesImp;
 
 
-public class ValueAttributes extends Value implements ValueAttributesImp {
+public class ValueAttributes extends MonValue implements ValueAttributesImp {
     
     private  String unit;
 

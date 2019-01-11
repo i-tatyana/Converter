@@ -3,7 +3,7 @@ package irix.measurement.structure;
 import irix.measurement.service.LocationMeasurementAttributesImp;
 
 
-public class LocationMeasurementAttributes extends LocationMeasurement implements LocationMeasurementAttributesImp /*implements Comparable<LocationAttributesMeasurement>*/ {
+public class LocationMeasurementAttributes extends LocLocationMeasurement implements LocationMeasurementAttributesImp /*implements Comparable<LocationAttributesMeasurement>*/ {
     
     private String ref;
 
@@ -37,7 +37,7 @@ public class LocationMeasurementAttributes extends LocationMeasurement implement
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LocationMeasurement)) return false;		
+        if (!(obj instanceof LocLocationMeasurement)) return false;		
 	return this.ref == ((LocationMeasurementAttributes)obj).ref;
     }
 

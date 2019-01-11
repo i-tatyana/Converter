@@ -1,8 +1,8 @@
 package irix.measurement.service;
 
-import irix.measurement.structure.Measurement;
+import irix.measurement.structure.MonMeasurement;
 
 
 public interface MeasurementsImp {
-    Measurement getMeasurement();
+    MonMeasurement getMonMeasurement();
 }

@@ -1,4 +1,0 @@
-package irix.measurements.structure;
-
-
-
