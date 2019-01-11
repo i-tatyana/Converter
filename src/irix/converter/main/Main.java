@@ -21,6 +21,7 @@ import irix.measurement.structure.MeasurementsSectionalAttributes;
 import irix.measurement.structure.MeasuringPeriod;
 import irix.measurement.structure.Value;
 import irix.measurement.structure.ValueAttributes;
+import irix.section.identifier.Sectional;
 import irix.xml.service.XmlBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -130,9 +131,7 @@ public class Main {
                     String class_name = file.getName().replace(".class", "");  
                     String package_name = getPackageName(class_name);
                     Class sectionalClass = Class.forName(package_name);
-                    
-                    System.out.println(class_name);
-                    
+                                        
                     Map<Class, List<Field>> elements = getAllIrixElements(class_name);
                     
                     IdentificationSectional identification = new IdentificationSectional(
@@ -141,7 +140,7 @@ public class Main {
                                     new PersonContactDetails("Vasya", "met.gov", "met@gmail.com"), 
                                     new OrganizationContactDetails("Vasya","organisationID", "country", "phoneNumber", "faxNumber", "emailAddress", "description")));
 
-                        MeasurementsSectional measurement = new MeasurementsSectional(
+                    MeasurementsSectional measurement = new MeasurementsSectional(
                             new DoseRate(
                                 "Gamma", 
                                 new MeasuringPeriod("12.1.2019", "25.1.2019"), 
@@ -166,6 +165,8 @@ public class Main {
 //                                measurement.getDoseRate().getMeasurements().getMeasurement().getValidated() + " " + 
 //                                measurement.getMeasurementsSectionalAttributes().getValidAt()
 //                        );
+
+                        
                         
                     LocationsSectional location = new LocationsSectional(
                             new Location("Snovsk", 
@@ -174,21 +175,39 @@ public class Main {
                                             new HeightAttributes("Sea", "m"))), 
                             new LocationAttributes(34)));
 //                    System.out.println(
-//                            location.getLocation().getName() + " " +
+//                            location.getLocation().getLocationName() + " " +
 //                            location.getLocation().getGeographicCoordinates().getLatitude()+ " " + 
 //                            location.getLocation().getGeographicCoordinates().getLongitude()+ " " + 
 //                            location.getLocation().getGeographicCoordinates().getHeight().getAltitudePhantom()+ " " + 
 //                            location.getLocation().getGeographicCoordinates().getHeight().getHeightAttributes().getAbove()+ " " + 
 //                            location.getLocation().getGeographicCoordinates().getHeight().getHeightAttributes().getUnit()+ " " +
 //                            location.getLocation().getLocationAttributes().getId());
+
+                    Sectional sectional = new Sectional(identification, measurement, location);
+//                    System.out.println(sectional);
+                    
+                        
+//                        System.out.println(
+//                                sectional.getMeasurementsSectional().getDoseRate().getDoseRateType()  + " " +
+//                                        
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasuringPeriod().getStartTime() + " " +
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasuringPeriod().getEndTime() + " " +
+//                                        
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasurements().getMeasurement().getLocationMeasurement().getLocationMeasurementAttributes().getRef() + " " +
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasurements().getMeasurement().getValue().getDosePhantom() + " " +
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasurements().getMeasurement().getValue().getValueAttributes().getUnit() + " " +
+//                                sectional.getMeasurementsSectional().getDoseRate().getMeasurements().getMeasurement().getValidated() + " " + 
+//                                sectional.getMeasurementsSectional().getMeasurementsSectionalAttributes().getValidAt()
+//                        );
            
                     for (Map.Entry entry: elements.entrySet()) {
                         Class key = (Class) entry.getKey();
                         List<Field> value = (List<Field>) entry.getValue(); 
                         List<Field> fields = getHierarchy(value);
+                       
                         Method method = null; 
                         
-                        if(class_name.contains(class_name)){
+                        if(class_name.contains("Sectional")){
                             if(key.getPackage().getName().contains("sections")){
                                 System.out.println(key.getSimpleName());
                                 xml.createElement(key.getSimpleName());
@@ -201,20 +220,20 @@ public class Main {
                                             method = getMethod(sectionalClass,field.getName()); 
                                             if(field.getName().contains("Phantom")){
                                                 System.out.println("Phantom");
-                                                xml.setElementValue(key.getSimpleName(), String.valueOf(method.invoke(location, null)));
-                                                System.out.println(key.getSimpleName() + " " + String.valueOf(method.invoke(location, null)));
+                                                xml.setElementValue(key.getSimpleName(), String.valueOf(method.invoke(sectional, null)));
+                                                System.out.println(key.getSimpleName() + " " + String.valueOf(method.invoke(sectional, null)));
                                             }
                                             else{                                                
-                                                System.out.println(field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(location, null)) + " " + key.getSimpleName());                                        
-                                                xml.createElement(key.getSimpleName(), field.getName().substring(0, 1).toUpperCase().concat(field.getName().substring(1)), String.valueOf(method.invoke(location, null)));
+                                                System.out.println(field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(sectional, null)) + " " + key.getSimpleName());                                        
+                                                xml.createElement(key.getSimpleName(), field.getName().substring(0, 1).toUpperCase().concat(field.getName().substring(1)), String.valueOf(method.invoke(sectional, null)));
                                             }
                                         }
                                     }
                                     else{                                        
                                         for(Field field : fields){ 
                                             method = getMethod(sectionalClass,field.getName()); 
-                                            System.out.println(field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(location, null)) + " " + key.getSimpleName());                                        
-                                            xml.createAttribute(key.getSuperclass().getSimpleName(), field.getName(), String.valueOf(method.invoke(location, null)));
+                                            System.out.println("Troubles!!! " + field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(sectional, null)) + " " + key.getSimpleName());                                        
+                                            xml.createAttribute(key.getSuperclass().getSimpleName(), field.getName(), String.valueOf(method.invoke(sectional, null)));
                                         }
                                     }                                    
                                 }
@@ -223,13 +242,71 @@ public class Main {
                                     System.out.println(key.getSimpleName());
                                     xml.createElement(key.getSuperclass().getSimpleName(), key.getSimpleName());
                                 }
-                            }                            
-                        }
+                            }                        
+                        } 
                     }                    
-                    xml.writeContentIntoFile("C:\\Users\\user\\Desktop\\file.xml"); /**/  
-                }
+                    xml.writeContentIntoFile("C:\\Users\\user\\Desktop\\file.xml");  
+                }  
             }
         }
+    }
+    
+    private static XmlBuilder chooseSection(Class sectionalClass, String class_name, Class key, List<Field> fields, Sectional object, XmlBuilder xml) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        switch(class_name){
+            case "IdentificationSectional":{
+                xml = convertToXml(sectionalClass, key, fields, object, xml);
+                break;
+            }
+            case "MeasurementsSectional":{
+                xml = convertToXml(sectionalClass, key, fields, object, xml);
+                break;
+            }
+            case "LocationsSectional":{
+                xml = convertToXml(sectionalClass, key, fields, object, xml);
+                break;
+            }
+        }
+        return xml;
+    }
+    
+    private static XmlBuilder convertToXml(Class sectionalClass, Class key, List<Field> fields, Sectional object, XmlBuilder xml) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        Method method = null;                         
+        if(key.getPackage().getName().contains("sections")){
+            System.out.println(key.getSimpleName());
+            xml.createElement(key.getSimpleName());
+        }
+        else{
+            if(!fields.isEmpty()){   
+                if(!key.getSimpleName().contains("Attributes")){
+                    xml.createElement(key.getSuperclass().getSimpleName(), key.getSimpleName());
+                    for(Field field : fields){
+                        method = getMethod(sectionalClass,field.getName()); 
+                        if(field.getName().contains("Phantom")){
+                            System.out.println("Phantom");
+                            xml.setElementValue(key.getSimpleName(), String.valueOf(method.invoke(object, null)));
+                            System.out.println(key.getSimpleName() + " " + String.valueOf(method.invoke(object, null)));
+                        }
+                        else{                                                
+                            System.out.println(field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(object, null)) + " " + key.getSimpleName());                                        
+                            xml.createElement(key.getSimpleName(), field.getName().substring(0, 1).toUpperCase().concat(field.getName().substring(1)), String.valueOf(method.invoke(object, null)));
+                        }
+                    }
+                }
+                else{                                        
+                    for(Field field : fields){ 
+                        method = getMethod(sectionalClass,field.getName()); 
+                        System.out.println(field.getName() + " " + method.getName() + " " + String.valueOf(method.invoke(object, null)) + " " + key.getSimpleName());                                        
+                        xml.createAttribute(key.getSuperclass().getSimpleName(), field.getName(), String.valueOf(method.invoke(object, null)));
+                    }
+                }                                    
+            }
+            else{
+                // fields are empty
+                System.out.println(key.getSimpleName());
+                xml.createElement(key.getSuperclass().getSimpleName(), key.getSimpleName());
+            }
+        }
+        return xml;
     }
     
     private static List<Field> getHierarchy(List<Field>inputFields){
@@ -349,4 +426,3 @@ public class Main {
     }
          
 }
-

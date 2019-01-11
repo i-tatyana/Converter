@@ -17,8 +17,9 @@ import irix.measurement.structure.MeasurementsSectionalAttributes;
 import irix.measurement.structure.MeasuringPeriod;
 import irix.measurement.structure.Value;
 import irix.measurement.structure.ValueAttributes;
+import irix.section.identifier.Sectional;
 
-public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, MeasurementsImp, MeasurementImp, LocationMeasurementImp, LocationMeasurementAttributesImp, ValueImp, ValueAttributesImp, Comparable<MeasurementsSectional> {
+public class MeasurementsSectional extends Sectional /*implements DoseRateImp, MeasuringPeriodImp, MeasurementsImp, MeasurementImp, LocationMeasurementImp, LocationMeasurementAttributesImp, ValueImp, ValueAttributesImp, Comparable<MeasurementsSectional>*/ {
         
     private DoseRate doseRate;
     private MeasurementsSectionalAttributes measurementsSectionalAttributes;
@@ -66,7 +67,7 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
         if (!(obj instanceof MeasurementsSectional)) return false;
         return this.doseRate == ((MeasurementsSectional)obj).getDoseRate();
     }
-
+/*
     @Override
     public int compareTo(MeasurementsSectional o) {
         return doseRate.compareTo(o.getDoseRate());
@@ -74,12 +75,12 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
 
     @Override
     public MeasuringPeriod getMeasuringPeriod() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasuringPeriod();
     }
 
     @Override
     public Measurements getMeasurements() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements();
     }
 
     @Override
@@ -94,17 +95,17 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
 
     @Override
     public Measurement getMeasurement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements().getMeasurement();
     }
 
     @Override
     public LocationMeasurement getLocationMeasurement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements().getMeasurement().getLocationMeasurement();
     }
 
     @Override
     public Value getValue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements().getMeasurement().getValue();
     }
 
     @Override
@@ -114,7 +115,7 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
 
     @Override
     public LocationMeasurementAttributes getLocationMeasurementAttributes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements().getMeasurement().getLocationMeasurement().getLocationMeasurementAttributes();
     }
 
     @Override
@@ -129,7 +130,7 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
 
     @Override
     public ValueAttributes getValueAttributes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getDoseRate().getMeasurements().getMeasurement().getValue().getValueAttributes();
     }
 
     @Override
@@ -145,6 +146,5 @@ public class MeasurementsSectional implements DoseRateImp, MeasuringPeriodImp, M
     public String getValidAt() {
         return this.getMeasurementsSectionalAttributes().getValidAt();
     }    
-    
+    */
 }
-

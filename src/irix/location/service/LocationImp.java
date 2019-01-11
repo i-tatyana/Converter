@@ -5,7 +5,7 @@ import irix.location.structure.LocationAttributes;
 
 
 public interface LocationImp {
-    String getName();
+    String getLocationName();
     GeographicCoordinates getGeographicCoordinates();
     LocationAttributes getLocationAttributes();
 }

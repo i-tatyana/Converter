@@ -6,25 +6,25 @@ import irix.location.service.LocationImp;
 
 public class Location extends LocationsSectional implements LocationImp /*, Comparable<Location>*/ {
         
-    private String name;
+    private String locationName;
     private GeographicCoordinates geographicCoordinates;
     private LocationAttributes locationAttributes;
 
     public Location() {
     }
 
-    public Location(String name, GeographicCoordinates geographicCoordinates, LocationAttributes locationAttributes) {
-        this.name = name;
+    public Location(String locationName, GeographicCoordinates geographicCoordinates, LocationAttributes locationAttributes) {
+        this.locationName = locationName;
         this.geographicCoordinates = geographicCoordinates;
         this.locationAttributes = locationAttributes;
     }
 
-    public String getName() {
-        return name;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public GeographicCoordinates getGeographicCoordinates() {
@@ -45,7 +45,7 @@ public class Location extends LocationsSectional implements LocationImp /*, Comp
     
     @Override
     public String toString() {
-        return "name=" + name + ", "
+        return "locationName=" + locationName + ", "
                 + "geographicCoordinates=" + geographicCoordinates + ", "
                 + "locationAttributes=" + locationAttributes;
     }
@@ -54,14 +54,14 @@ public class Location extends LocationsSectional implements LocationImp /*, Comp
     public int hashCode() {
         final int prime = 97;
         int hash = 3;
-        hash = prime * hash + ((name == null) ? 0 : name.hashCode());
+        hash = prime * hash + ((locationName == null) ? 0 : locationName.hashCode());
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Location)) return false;		
-	return this.name == ((Location)obj).name;
+	return this.locationName == ((Location)obj).locationName;
     }
 
     public int compareTo(Location o) {        

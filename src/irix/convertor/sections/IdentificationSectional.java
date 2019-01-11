@@ -8,9 +8,10 @@ import irix.identification.structure.Identifications;
 import irix.identification.structure.OrganizationContactDetails;
 import irix.identification.structure.PersonContactDetails;
 import irix.identification.structure.ReportDetails;
+import irix.section.identifier.Sectional;
 
 
-public class IdentificationSectional implements IdentificationSectionalImp, IdentificationsImp, PersonContactDetailsImp, OrganizationContactDetailsImp {
+public class IdentificationSectional extends Sectional /*implements IdentificationSectionalImp, IdentificationsImp, PersonContactDetailsImp, OrganizationContactDetailsImp*/ {
     
     ReportDetails reportDetails;
     Identifications identifications;
@@ -38,7 +39,7 @@ public class IdentificationSectional implements IdentificationSectionalImp, Iden
     public void setIdentifications(Identifications identifications) {
         this.identifications = identifications;
     }
-
+/*
     @Override
     public String toString() {
         return "reportDetails=" + reportDetails + ", "
@@ -129,6 +130,6 @@ public class IdentificationSectional implements IdentificationSectionalImp, Iden
     public String getEmailAddress() {
         return this.getIdentifications().getOrganization().getEmailAddress();
     }
-    
+    */
 }
 

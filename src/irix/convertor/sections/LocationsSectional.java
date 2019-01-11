@@ -9,9 +9,10 @@ import irix.location.structure.Height;
 import irix.location.structure.HeightAttributes;
 import irix.location.structure.Location;
 import irix.location.structure.LocationAttributes;
+import irix.section.identifier.Sectional;
 
 
-public class LocationsSectional implements LocationImp, GeographicCoordinatesImp, HeightImp, HeightAttributesImp, Comparable<LocationsSectional> {
+public class LocationsSectional extends Sectional /*implements LocationImp, GeographicCoordinatesImp, HeightImp, HeightAttributesImp, Comparable<LocationsSectional>*/ {
     
     private Location location;    
 
@@ -43,7 +44,7 @@ public class LocationsSectional implements LocationImp, GeographicCoordinatesImp
         if (!(obj instanceof LocationsSectional)) return false;
         return this.location == ((LocationsSectional)obj).getLocation();
     }
-
+/*
     @Override
     public int compareTo(LocationsSectional o) {
         return location.compareTo(o.getLocation());
@@ -107,6 +108,6 @@ public class LocationsSectional implements LocationImp, GeographicCoordinatesImp
     public Integer getId() {
         return this.getLocation().getLocationAttributes().getId();
     }
-    
+    */
 }
 
