@@ -5,26 +5,26 @@ import irix.measurement.service.ValueAttributesImp;
 
 public class ValueAttributes extends MonValue implements ValueAttributesImp {
     
-    private  String unit;
+    private  String valueUnit;
 
     public ValueAttributes() {
     }
 
-    public ValueAttributes(String unit) {
-        this.unit = unit;
+    public ValueAttributes(String valueUnit) {
+        this.valueUnit = valueUnit;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getValueUnit() {
+        return valueUnit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setValueUnit(String valueUnit) {
+        this.valueUnit = valueUnit;
     }
 
     @Override
     public String toString() {
-        return "unit=" + unit;
-    }
+        return "valueUnit=" + valueUnit;
+    }    
         
 }

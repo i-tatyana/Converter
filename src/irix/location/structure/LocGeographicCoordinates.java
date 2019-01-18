@@ -55,5 +55,12 @@ public class LocGeographicCoordinates extends LocLocation implements GeographicC
        }
        return 0;
     }
+
+    @Override
+    public String toString() {
+        return "locLatitude=" + locLatitude + ", "
+                + "locLongitude=" + locLongitude + ", "
+                + "locHeight=" + locHeight;
+    }
         
 }

@@ -1,7 +1,7 @@
 package irix.measurement.structure;
 
+import irix.converter.sections.MonMeasurementsSectional;
 import irix.measurement.service.DoseRateImp;
-import irix.report.structure.MonMeasurementsSectional;
 
 
 public class MonDoseRate extends MonMeasurementsSectional implements DoseRateImp {

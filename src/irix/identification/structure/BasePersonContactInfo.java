@@ -1,6 +1,8 @@
 package irix.identification.structure;
 
 import irix.identification.service.PersonContactInfoImp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BasePersonContactInfo extends IdIdentifications implements PersonContactInfoImp {
@@ -8,6 +10,7 @@ public class BasePersonContactInfo extends IdIdentifications implements PersonCo
     String basePersonName;
     String basePersonOrganisationID;
     String basePersonEmailAddress;
+    List<BasePersonContactInfo>personContactInfoList = new ArrayList<BasePersonContactInfo>();
 
     public BasePersonContactInfo() {
     }
@@ -16,6 +19,8 @@ public class BasePersonContactInfo extends IdIdentifications implements PersonCo
         this.basePersonName = basePersonName;
         this.basePersonOrganisationID = basePersonOrganisationID;
         this.basePersonEmailAddress = basePersonEmailAddress;
+        
+        this.personContactInfoList.add(this);
     }
 
     public String getBasePersonName() {
@@ -48,5 +53,14 @@ public class BasePersonContactInfo extends IdIdentifications implements PersonCo
                 + "basePersonOrganisationID=" + basePersonOrganisationID + ", "
                 + "basePersonEmailAddress=" + basePersonEmailAddress;
     }
+
+    public List<BasePersonContactInfo> getPersonContactInfoList() {
+        return personContactInfoList;
+    }
+
+    public void setPersonContactInfoList(List<BasePersonContactInfo> personContactInfoList) {
+        this.personContactInfoList = personContactInfoList;
+    }
+    
     
 }

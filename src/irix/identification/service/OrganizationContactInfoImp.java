@@ -1,5 +1,8 @@
 package irix.identification.service;
 
+import irix.identification.structure.BaseOrganizationContactInfo;
+import java.util.List;
+
 
 public interface OrganizationContactInfoImp {
     String getBaseName();
@@ -9,4 +12,5 @@ public interface OrganizationContactInfoImp {
     String getBaseFaxNumber();
     String getBaseEmailAddress();
     String getBaseDescription();
+    List<BaseOrganizationContactInfo> getOrganizationContactInfoList();
 }

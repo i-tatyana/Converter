@@ -1,7 +1,7 @@
 package irix.location.structure;
 
+import irix.converter.sections.LocLocationsSectional;
 import irix.location.service.LocationImp;
-import irix.report.structure.LocLocationsSectional;
 
 
 public class LocLocation extends LocLocationsSectional implements LocationImp /*, Comparable<Location>*/ {

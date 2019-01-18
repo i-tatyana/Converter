@@ -1,6 +1,8 @@
 package irix.identification.structure;
 
 import irix.identification.service.OrganizationContactInfoImp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BaseOrganizationContactInfo extends IdIdentifications implements OrganizationContactInfoImp {
@@ -12,6 +14,8 @@ public class BaseOrganizationContactInfo extends IdIdentifications implements Or
     String baseFaxNumber;
     String baseEmailAddress;
     String baseDescription;
+    List<BaseOrganizationContactInfo> organizationContactInfoList = new ArrayList<BaseOrganizationContactInfo>();
+    
 
     public BaseOrganizationContactInfo() {
     }
@@ -24,6 +28,8 @@ public class BaseOrganizationContactInfo extends IdIdentifications implements Or
         this.baseFaxNumber = baseFaxNumber;
         this.baseEmailAddress = baseEmailAddress;
         this.baseDescription = baseDescription;
+        
+        this.organizationContactInfoList.add(this);
     }
 
     public String getBaseName() {
@@ -81,5 +87,24 @@ public class BaseOrganizationContactInfo extends IdIdentifications implements Or
     public void setBaseDescription(String baseDescription) {
         this.baseDescription = baseDescription;
     }
+
+    public List<BaseOrganizationContactInfo> getOrganizationContactInfoList() {
+        return organizationContactInfoList;
+    }
+
+    public void setOrganizationContactInfoList(List<BaseOrganizationContactInfo> organizationContactInfoList) {
+        this.organizationContactInfoList = organizationContactInfoList;
+    }  
+
+    @Override
+    public String toString() {
+        return "baseName=" + baseName + ", "
+                + "baseOrganisationID=" + baseOrganisationID + ", "
+                + "baseCountry=" + baseCountry + ", "
+                + "basePhoneNumber=" + basePhoneNumber + ", "
+                + "baseFaxNumber=" + baseFaxNumber + ", "
+                + "baseEmailAddress=" + baseEmailAddress + ", "
+                + "baseDescription=" + baseDescription;
+    }    
     
 }

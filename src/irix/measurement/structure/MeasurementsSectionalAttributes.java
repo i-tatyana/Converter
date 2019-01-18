@@ -1,9 +1,11 @@
 package irix.measurement.structure;
 
-import irix.report.structure.MonMeasurementsSectional;
+import irix.converter.sections.MonMeasurementsSectional;
+import irix.measurement.service.MeasurementsSectionalAttributesImp;
 
 
-public class MeasurementsSectionalAttributes extends MonMeasurementsSectional /*implements MeasurementsSectionalAttributesImp*/ /*implements MeasurementsSectionalAttributesImp*/  {
+
+public class MeasurementsSectionalAttributes extends MonMeasurementsSectional implements MeasurementsSectionalAttributesImp /*implements MeasurementsSectionalAttributesImp*/ /*implements MeasurementsSectionalAttributesImp*/  {
      
     private String validAt;
 
